@@ -1,0 +1,30 @@
+#Set Mismatch
+
+#You have a set of integers s, which originally contains all the numbers from 1 to n. 
+#Unfortunately, due to some error, one of the numbers in s got duplicated to another number in the set, which results in repetition of one number and loss of another number.
+#You are given an integer array nums representing the data status of this set after the error.
+#Find the number that occurs twice and the number that is missing and return them in the form of an array.
+
+
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        
+        nums = sorted(nums)
+        
+        double = -1
+        missing = len(nums)
+        
+        for i in range(len(nums)):
+            #double if same as prev number
+            if i>0:
+                if nums[i] == nums[i-1]:
+                    double = nums[i]
+            #missing if a)the starting number is not 1, missing num is 1 or b)the current number and the prev number have a gap of 2, missing num is num in between the two 
+            if i == 0:
+                if nums[i]>1:
+                    missing = 1
+            elif nums[i]>nums[i-1]+1:
+                missing = nums[i]-1
+                
+        
+        return [double, missing]
