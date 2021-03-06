@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        #array to store values of nodes in each level
+        levelSums = []
+        
+        #create an array with each node, its height
+        toVisit = [[root,0]]
+        
+        #BFS through the tree
+        while toVisit:
+            if toVisit[0][0].left:
+                toVisit.append([toVisit[0][0].left,toVisit[0][1]+1])
+            if toVisit[0][0].right:
+                toVisit.append([toVisit[0][0].right, toVisit[0][1]+1])
+            
+            curr = toVisit.pop(0)
+            #store node value in respective levelSums sub-array by height, sum of all node values
+            if len(levelSums)<=curr[1]:
+                levelSums.append([curr[0].val])
+            else:
+                levelSums[curr[1]].append(curr[0].val)
+                levelSums[curr[1]][0]+=curr[0].val
+        
+        #replace each sub-array with average of node values in sub-array
+        for i in range(len(levelSums)):
+            levelSums[i] = float(levelSums[i][0]/len(levelSums[i]))
+
+        return levelSums
+            
+            
+            
+            
