@@ -1,2 +1,2 @@
 # LeetCode-Problems
-A repo with solutions to various LeetCode problems and monthly challenges
+A repo with my solutions to various LeetCode problems and monthly challenges
